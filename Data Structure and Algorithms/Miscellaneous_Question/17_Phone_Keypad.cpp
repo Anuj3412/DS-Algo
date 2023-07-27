@@ -26,6 +26,7 @@ vector<string> keypad(string digits)
     vector<string> ans;
     int index = 0;
     string str;
+    if(digits.length()==0) return {};
     vector<string> map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     solve(digits, str, index, map, ans);
     return ans;
