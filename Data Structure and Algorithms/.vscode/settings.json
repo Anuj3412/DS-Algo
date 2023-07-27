@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    "dummy.exe": true,
+    "**/*.exe": true
+  }
+}
