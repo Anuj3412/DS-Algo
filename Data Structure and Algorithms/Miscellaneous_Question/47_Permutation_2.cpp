@@ -15,7 +15,8 @@ void solve(vector<int> &nums, int index, set<vector<int>> &ans)
     {   if(nums[index]==nums[i] and i!=index) continue;
         swap(nums[i], nums[index]);
         solve(nums, index + 1, ans);
-        // backtracking
+        // backtracking --> ye isliye kar rahe h kyoki har baar sequence sahi rahe 
+        // abc --> bac (this needs to be converted back to abc for) --> abc --> cba :: like this
         swap(nums[i], nums[index]);
     }
 }
