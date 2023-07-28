@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Factorial
+// Factorial  --> Time Complexity : O(n)
 int factorial(int n){
     if(n==1) return 1;  // base condiion
     else return n*factorial(n-1);  // recursive relation
