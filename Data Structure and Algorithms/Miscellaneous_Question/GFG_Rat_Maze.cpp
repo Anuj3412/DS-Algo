@@ -1,3 +1,9 @@
+    /* RAT IN MAZE PROBLEM*/
+/*  here we keep the visited places record so as not to trace them again in way
+    we keep every choice for movement and check whether the next position is safe to go or not
+*/   
+   
+   
     #include <bits/stdc++.h>
     using namespace std;
 
