@@ -67,6 +67,7 @@
     {
         // Write your code here.
         vector<string> ans;
+        if(m[0][0]==0) return ans; // boundary case 
         vector<vector<int>> visited = m;
         for (int i = 0; i < n; i++)
         {
