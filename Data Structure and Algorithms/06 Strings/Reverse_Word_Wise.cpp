@@ -9,13 +9,15 @@ string reverseStringWordWise(string input)
     string temp = "";
     for (int i = 0; i < input.size(); i++)
     {
-    if (input[i] == ' ' or i==input.size()-1){
-            if(i==input.size()-1){
+        if (input[i] == ' ' or i == input.size() - 1)
+        {
+            if (i == input.size() - 1)
+            {
                 temp.push_back(input[i]);
                 reverse(temp.begin(), temp.end());
 
-                ans=ans + temp;
-                temp="";
+                ans = ans + temp;
+                temp = "";
                 continue;
             }
             reverse(temp.begin(), temp.end());
@@ -23,7 +25,7 @@ string reverseStringWordWise(string input)
             temp = "";
             continue;
         }
-        
+
         temp.push_back(input[i]);
     }
     reverse(ans.begin(), ans.end());
@@ -33,7 +35,8 @@ string reverseStringWordWise(string input)
 
 int main()
 {
-    string s = "Hello I am Shreyashish Sengupta";
+    string s;
+    getline(cin, s);
     string ans = reverseStringWordWise(s);
     cout << ans << endl;
 }
