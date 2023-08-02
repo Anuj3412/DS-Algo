@@ -1,39 +1,18 @@
 #include <iostream>
-#include <bits/stdc++.h>
-using namespace std;
-
-string reverseStringWordWise(string input)
-{
-    // Write your code here
-    string ans = "";
-    string temp = "";
-    for (int i = 0; i < input.size(); i++)
-    {
-    if (input[i] == ' ' or i==input.size()-1){
-            if(i==input.size()-1){
-                temp.push_back(input[i]);
-                reverse(temp.begin(), temp.end());
-
-                ans=ans + temp;
-                temp="";
-                continue;
-            }
-            reverse(temp.begin(), temp.end());
-            ans = ans + temp + ' ';
-            temp = "";
-            continue;
-        }
-        
-        temp.push_back(input[i]);
-    }
-    reverse(ans.begin(), ans.end());
-
-    return ans;
-}
+#include <string>
 
 int main()
 {
-    string s = "Hello I am Shreyashish Sengupta";
-    string ans = reverseStringWordWise(s);
-    cout << ans << endl;
+    std::string str = "We think in generalities, but we live in details.";
+    // (quoting Alfred N. Whitehead)
+
+    std::string str2 = str.substr(3, 5); // "think"
+
+    std::size_t pos = str.find("live"); // position of "live" in str
+
+    std::string str3 = str.substr(pos); // get from "live" to the end
+
+    std::cout << pos<<" "<<str2 << ' ' << str3 << '\n';
+
+    return 0;
 }
