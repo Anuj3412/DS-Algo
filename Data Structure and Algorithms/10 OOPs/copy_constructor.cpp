@@ -36,13 +36,15 @@ public:
 
 };
 
+
+
 int main(int argc, char const *argv[])
 {
     hero A;
     A.sethealth(99);
     A.setname("Anuj");
     cout << A.name << " A " << A.health<<endl;
-    hero B(A);
+    hero B = A;         // this is a copy assignment operator that will copy A to B
     cout << B.name << " B " << B.health<<endl;
     return 0;
 }
