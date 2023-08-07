@@ -6,7 +6,7 @@ class hero{
     // Access modifiers
     public:
 
-    //data functions or properties
+    //data member or properties
     string name;
     int age;
 

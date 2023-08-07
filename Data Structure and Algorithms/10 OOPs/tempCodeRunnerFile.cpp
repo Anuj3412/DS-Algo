@@ -1,4 +1,6 @@
- // Hero()
+  // hero(hero &temp) // here it is passed by refrence because of infinite loop
+    //                  // pass by value would have called copy constructor again and again
     // {
-    //     cout << "Overwritten Constructor" << endl;
+    //     this->health = temp.health;
+    //     this->name = temp.name;
     // }
