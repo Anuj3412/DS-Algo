@@ -4,6 +4,8 @@ using namespace std;
 class hero{
 
     // Access modifiers
+    private:
+    protected:
     public:
 
     //data member or properties
