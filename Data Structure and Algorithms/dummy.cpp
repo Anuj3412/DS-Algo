@@ -1,62 +1,42 @@
-#include <bits/stdc++.h>  #include<iostream>
-
+#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-class ComplexNumbers
-
+class Car
 {
-    int real;
-    int imaginary;
-
+    // Write your constructor and printCarInfo method here.
 public:
-    ComplexNumbers(int real, int imaginary)
+    int noOfGear;
+    string color;
+};
+
+class RaceCar : public Car
+{
+    // Write your constructor and printRaceCarInfo method here.
+public:
+    int maxSpeed;
+
+    RaceCar(int gear, string color, int speed)
     {
-        this->real = real;
-        this->imaginary = imaginary;
+        this->noOfGear = gear;
+        this->color = color;
+        this->maxSpeed = speed;
     }
-    void plus(ComplexNumbers c)
+
+    void printInfo()
     {
-        int real = this->real + c.real;
-        int imaginary = this->imaginary + c.imaginary;
-        this->real = real;
-        this->imaginary = imaginary;
+        cout << "noOfGear: " << this->noOfGear << endl;
+        cout << "color: " << this->color << endl;
+        cout << "maxSpeed: " << this->maxSpeed << endl;
     }
-    void multiply(ComplexNumbers c)
-    {
-        int real = (this->real * c.real) - (this->imaginary * c.imaginary);
-        int imaginary = (this->real * c.imaginary) + (this->imaginary * c.real);
-        this->real = real;
-        this->imaginary = imaginary;
-    }
-    void print() { cout << this->real << " + "
-                        << "i" << this->imaginary << endl; }
 };
 
 int main()
 {
-    int real1, imaginary1, real2, imaginary2;
-
-    cin >> real1 >> imaginary1;
-    cin >> real2 >> imaginary2;
-
-    ComplexNumbers c1(real1, imaginary1);
-    ComplexNumbers c2(real2, imaginary2);
-
-    int choice;
-    cin >> choice;
-
-    if (choice == 1)
-    {
-        c1.plus(c2);
-        c1.print();
-    }
-    else if (choice == 2)
-    {
-        c1.multiply(c2);
-        c1.print();
-    }
-    else
-    {
-        return 0;
-    }
+    int noOfGear, maxSpeed;
+    string color;
+    cin >> noOfGear >> color >> maxSpeed;
+    RaceCar raceCar(noOfGear, color, maxSpeed);
+    raceCar.printInfo();
+    return 0;
 }
