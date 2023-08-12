@@ -42,7 +42,7 @@ void insertPosition(int data, int pos, node *&head, node *&tail)
     }
 
     // apna pointer jaha add karna h --> uske previous position par pauch gya h
-    if (temp->next == NULL)
+    if (temp->next == NULL) // ye last case k liye h --> agar temp last me h to tail bhi change karni hogi
     {
         node *newNode = new node(data);
         temp->next = newNode;
@@ -87,7 +87,7 @@ int main()
     insertPosition(60, 8, head, tail);
     printList(head);
     cout << endl;
-    printList(tail);
+    printList(tail); // check karne ko ki tail sahi position par h ya nahi
 
     return 0;
 }
