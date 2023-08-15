@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/* list that has node --> that store both next and previous data */
+
 class node
 {
 
@@ -63,7 +65,7 @@ void insertAtTail(int data, node *&tail)
     tail = temp;
 }
 
-// insert in middle
+// insert in position
 void insertAtMid(int data, int pos, node *&head, node *&tail)
 {
     // Boundary condition --> insertion at head
@@ -103,6 +105,50 @@ void insertAtMid(int data, int pos, node *&head, node *&tail)
     curr->prev = newNode;
 }
 
+
+void deletion(int pos , node* &head){
+
+    // at head position
+    if((pos==1)){
+        node* temp = head;
+        head = temp->next;
+        temp->next = NULL;
+        head->prev=NULL;
+        delete[] temp ;
+        return;
+    }
+
+    // at any position
+    int cnt = 1;
+    node* temp = head;
+    while(cnt < pos){
+        temp = temp->next;
+        cnt++;
+    }
+
+    // delete at last position
+    if(temp->next==NULL){
+
+        node* behind = temp->prev;
+        behind->next = NULL;
+        temp->prev = NULL;
+        delete [] temp;
+        return;
+    }
+
+    node* behind = temp->prev;
+    node* forward = temp->next;
+    behind->next = forward;
+    forward->prev = behind;
+    temp->next = NULL;
+    temp->prev = NULL;
+
+    delete(temp);
+
+
+
+}
+
 int main()
 {
 
@@ -129,6 +175,10 @@ int main()
     cout << getlength(head) << endl;
     // insertion at mid
     insertAtMid(0, 12, head, tail);
+    print(head);
+    cout << getlength(head) << endl;
+    //deletion at any position
+    deletion(12 , head);
     print(head);
     cout << getlength(head) << endl;
 
