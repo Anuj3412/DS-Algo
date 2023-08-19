@@ -100,11 +100,11 @@ int main()
     node *n1 = new node(0);
     node *tail = NULL;
     insert(0, 45, tail);
-    // insert(1, 0, tail);
-    // insert(2, 1, tail);
-    // insert(3, 2, tail);
-    // insert(4, 3, tail);
-    // insert(5, 4, tail);
+    insert(1, 0, tail);
+    insert(2, 1, tail);
+    insert(3, 2, tail);
+    insert(4, 3, tail);
+    insert(5, 4, tail);
     print(tail);
     cout << endl;
     deletion(0, tail);
