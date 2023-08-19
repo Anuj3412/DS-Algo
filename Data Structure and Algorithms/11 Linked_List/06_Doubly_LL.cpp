@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/* list that has node --> that store both next and previous data */
+/* list that has node --> that store both next and previous data address */
 
 class node
 {
