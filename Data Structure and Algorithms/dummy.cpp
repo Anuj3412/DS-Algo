@@ -1,76 +1,53 @@
-#include <bits/stdc++.h>  #include<iostream>
-
-#include <algorithm>
-
+#include<bits/stdc++.h>
 using namespace std;
 
-class Fraction
+
+
+
+
+int32_t main()
 {
-    int nm;
-    int dm;
-
-public:
-    Fraction(int nm, int dm)
+    // init_code();
+    int t;
+    cin >> t;
+    string ans = "MAYBE";
+    while (t--)
     {
-        this->nm = nm; // constructor
-        this->dm = dm;
-    }
-
-    void simplify()
-    {
-        int gcd = __gcd(nm, dm);
-        this->nm = this->nm / gcd;
-        this->dm = this->dm / gcd;
-    }
-
-    void Add(Fraction f)
-    {
-        int d = this->dm * f.dm;
-        int n = (d / this->dm) * this->nm + (d / f.dm) * f.nm;
-        this->nm = n;
-        this->dm = d;
-        simplify();
-    }
-
-    void Multiply(Fraction f)
-    {
-        this->nm = this->nm * f.nm;
-        this->dm = this->dm * f.dm;
-
-        simplify();
-    }
-
-    void print() { cout << this->nm << "/" << this->dm << endl; }
-};
-
-int main()
-{
-
-    int n1, d1;
-    cin >> n1 >> d1;
-    Fraction f1(n1, d1);
-    int n;
-
-    cin >> n;
-
-    for (int i = 1; i <= n; i++)
-    {
-
-        int choice, n2, d2;
-        cin >> choice >> n2 >> d2;
-        Fraction f2(n2, d2);
-
-        if (choice == 1)
+        int s, o, n;
+        cin >> s >> o >> n;
+        string str;
+        cin >> str;
+        int read = o;
+        int readmax = o;
+        int readmin = o;
+        int i = 0;
+        while (i < str.length())
         {
-            f1.Add(f2);
-            f1.print();
-        }
-        else
-        {
-            f1.Multiply(f2);
-            f1.print();
-        }
-    }
 
+            if (str[i] == '+')
+            {
+                read++;
+                readmax++;
+                if (readmax > s){
+                    ans = "YES";
+                    break;
+                }
+            }
+            else if (str[i] == '-')
+            {
+                read--;
+                readmin--;
+            }
+            i++;
+        }
+        if (readmax < s)
+        {
+            ans = "NO";
+        }
+        else if(readmax==s){
+            ans = "MAYBE";
+        }
+        cout << ans << "\n";
+    }
     return 0;
 }

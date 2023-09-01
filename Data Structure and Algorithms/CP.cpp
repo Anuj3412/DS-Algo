@@ -262,38 +262,31 @@ int32_t main()
     init_code();
     int t;
     cin >> t;
-    int ans = 1;
+    string ans = "MAYBE";
     while (t--)
     {
-        int n;
-        cin >> n;
+        int s , o ,n;
+        cin >> s >> o >> n;
         string str;
         cin >> str;
-        unordered_set<string> sUse;
-        if (str.length() == 2)
-        {
-            ans = 1;
-            break;
-        }
-        if (str.length() == 3)
-        {
-            ans = 2;
-            break;
-        }
-        sUse.insert(str.substr(0, 2));
-        for (int i = 1; i < n - 1; i++)
-        {
-            string k;
-            //  = str[i];
-            // k+=str[i+1];
-            k = str.substr(i, 2);
-            if (sUse.find(k) != sUse.end())
-                continue;
-            else
-            {
-                sUse.insert(k);
-                ans++;
+        int read = o;
+        int readmax = o;
+        // unordered_set<string> sUse;
+        int i = 0;
+        while(i<str.length()){
+
+            if(str[i]=='+'){
+                read++;
+                readmax++;
+                if(read == s) ans = "YES";                
             }
+            else if(str[i]=='-'){
+                read--;
+            }
+
+        }
+        if(readmax<s){
+            ans = "NO";
         }
         cout << ans << "\n";
     }
