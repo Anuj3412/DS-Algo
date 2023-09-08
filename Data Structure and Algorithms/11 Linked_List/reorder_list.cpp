@@ -46,68 +46,69 @@ int length(node *head)
     return len;
 }
 
-// Approach - 1
-// Time Complexity O(n)
-node * middle(node* &head)
-{
-    node* mid = head;
-    int len = length(head);
-    int i = 0;
-        while (i < len / 2)
-        {
-            mid = mid->next;
-            i++;
-        }
-    
-    
-    
-    return mid;
-}
-
 // Approach - 2 ---- (considering two pointers FAST and SLOW ---- as fast reaches end slow will be at mid)
 //  Time  Cmomplexity O(n)
 
-node *midd(node *head)
+node *getMiddle(node *head)
 {
     node *slow = head;
     node *fast = head;
-    while (fast != NULL and fast->next != NULL)
+
+    while (fast)
     {
-        slow = slow->next;
+        if (!fast->next or !fast->next->next)
+            return slow;
         fast = fast->next->next;
+        slow = slow->next;
     }
+
     return slow;
 }
 
-node* reverse(node* &head , node* prev){
+node *reverse(node *&head, node *prev)
+{
 
-    //base condition
-    if(head==NULL or head->next == NULL){
+    // base condition
+    if (head == NULL or head->next == NULL)
+    {
         head->next = prev;
         return head;
     }
 
-    node* nex = head->next;
+    node *nex = head->next;
     head->next = prev;
     prev = head;
     head = nex;
-    reverse(head , prev);
-    
+    reverse(head, prev);
 }
 
-void merge(node* &head1 , node* &head2 ){
-    node*temp1 = head1;
-    node*temp2 = head2;
-    while(temp1->next!=NULL and temp2->next != NULL){
-        node* nex1 = temp1->next;
-        node* nex2 = temp2->next;
-        temp1->next = temp2;
-        temp2=nex1 ;
-        temp1= nex1;
-        temp2= nex2;
-    }
+void merge(node *&head1, node *&head2)
+{
+    node *temp1 = head1;
+    node *temp2 = head2;
+   while(temp1!=NULL and temp2!=NULL){
+    node* nex = temp1->next;
+    temp1->next = temp2;
+    node* nex2 = temp2->next;
+    temp2->next = nex;
+    temp1=nex;
+    temp2=nex2;
+   }
 }
 
+/* 
+
+1. get the middle element
+2. cut the list in two halves
+3. reverse the right part 
+4. merge them as per requirement
+
+space Complexity : O(1)
+Time Complexity : O()
+
+
+
+ */
 int main()
 {
 
@@ -121,15 +122,11 @@ int main()
     insert(70, tail);
     insert(80, tail);
     print(head);
-    node *mid = middle(head);
-    node* head2 = mid;
-    cout<<head2->data<<endl;
-    reverse(head2 , NULL);
+    node* mid = getMiddle(head);
+    node * right = mid->next;
+    mid->next = NULL;
+    reverse(right , NULL);
+    merge(head , right);
     print(head);
-    print(head2);
-    merge(head , head2);
-    print(head);
-
-
     return 0;
 }

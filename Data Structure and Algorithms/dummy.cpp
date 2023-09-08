@@ -1,9 +1,5 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-
-
-
 
 int32_t main()
 {
@@ -28,7 +24,8 @@ int32_t main()
             {
                 read++;
                 readmax++;
-                if (readmax > s){
+                if (readmax > s)
+                {
                     ans = "YES";
                     break;
                 }
@@ -44,7 +41,8 @@ int32_t main()
         {
             ans = "NO";
         }
-        else if(readmax==s){
+        else if (readmax == s)
+        {
             ans = "MAYBE";
         }
         cout << ans << "\n";
