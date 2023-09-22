@@ -1,51 +1,51 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+
 using namespace std;
 
-int32_t main()
+int lastOccurrence(vector<int> arr, int x)
 {
-    // init_code();
-    int t;
-    cin >> t;
-    string ans = "MAYBE";
-    while (t--)
-    {
-        int s, o, n;
-        cin >> s >> o >> n;
-        string str;
-        cin >> str;
-        int read = o;
-        int readmax = o;
-        int readmin = o;
-        int i = 0;
-        while (i < str.length())
-        {
+    int low = 0;
+    int high = arr.size() - 1;
+    int result = -1;
 
-            if (str[i] == '+')
-            {
-                read++;
-                readmax++;
-                if (readmax > s)
-                {
-                    ans = "YES";
-                    break;
-                }
-            }
-            else if (str[i] == '-')
-            {
-                read--;
-                readmin--;
-            }
-            i++;
-        }
-        if (readmax < s)
+    while (low <= high)
+    {
+        int mid = (low + high) / 2;
+
+        if (arr[mid] == x)
         {
-            ans = "NO";
+            // result = mid;
+            low = mid + 1;
         }
-        else if (readmax == s)
+        else if (arr[mid] < x)
         {
-            ans = "MAYBE";
+            low = mid + 1;
         }
-        cout << ans << "\n";
+        else
+        {
+            high = mid - 1;
+        }
     }
+
+    return low;
+}
+
+int main()
+{
+    vector<int> arr = {1, 3, 4, 4, 5, 5, 5, 5, 10, 19, 20, 211};
+    int x = 4;
+
+    int lastOccurenceIndex = lastOccurrence(arr, x);
+
+    if (lastOccurenceIndex == -1)
+    {
+        cout << "Element not found" << endl;
+    }
+    else
+    {
+        cout << "Last occurrence of " << x << " is at index " << lastOccurenceIndex << endl;
+    }
+
     return 0;
 }
