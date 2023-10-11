@@ -119,12 +119,13 @@ void delete_dup2(node *&head) // using map method
     {
         if (curr->next != NULL and mp[curr->next->data] == false)
         {
-            mp[curr->data] = true;
+            mp[curr->next->data] = true;
             curr = curr->next;
         }
         else if (curr->next != NULL and mp[curr->next->data] == true)
         {
             curr->next = curr->next->next;
+            print(head);
         }
 
         else
@@ -136,13 +137,13 @@ void delete_dup2(node *&head) // using map method
 int main()
 {
 
-    node *head = new node(60);
-    insert(50, head);
-    insert(80, head);
-    insert(50, head);
-    insert(90, head);
-    insert(10, head);
+    node *head = new node(0);
     insert(0, head);
+    insert(1, head);
+    insert(0, head);
+    insert(2, head);
+    insert(2, head);
+    insert(1, head);
     print(head);
     cout << "after deleting duplicate " << endl;
     delete_dup2(head);

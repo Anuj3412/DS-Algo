@@ -293,7 +293,7 @@ void delete_duplicates(node *&head)
 // 1. O(n^2) time complexity -- stay on one element and delete all its duplicate
 // 2. O(n) space complexity - use a hashmap, where key is the value of each element in list and mark it as visited
 // 3. sort it -- then delete it
-void delete_dup(node *&head)        // normal nested loops
+void delete_dup(node *&head) // normal nested loops
 {
 
     node *curr = head;
@@ -316,8 +316,8 @@ void delete_dup(node *&head)        // normal nested loops
         curr = curr->next;
     }
 }
-            
-void delete_dup2(node *&head)       // using map method
+
+void delete_dup2(node *&head) // using map method
 {
     if (head == NULL)
         return;
@@ -337,7 +337,7 @@ void delete_dup2(node *&head)       // using map method
     {
         if (curr->next != NULL and mp[curr->next->data] == false)
         {
-            mp[curr->data] = true;
+            mp[curr->next->data] = true;
             curr = curr->next;
         }
         else if (curr->next != NULL and mp[curr->next->data] == true)
@@ -352,16 +352,115 @@ void delete_dup2(node *&head)       // using map method
     }
 }
 
+// Function to sort 0 1 2
+// 1. keep count of 0 1 2 --- change the data of the list accordingly
+// Time Complexity -- O(n) , space -- O(1)
+void sort012(node *&head)
+{
+    if (head == NULL)
+        return;
+
+    int oneCount = 0;
+    int zeroCount = 0;
+    int twoCount = 0;
+    node *temp = head;
+    while (temp != NULL)
+    {
+        if (temp->data == 0)
+            zeroCount++;
+        else if (temp->data == 1)
+            oneCount++;
+        else if (temp->data == 2)
+            twoCount++;
+        temp = temp->next;
+    }
+
+    temp = head;
+    while (zeroCount)
+    {
+        temp->data = 0;
+        temp = temp->next;
+        zeroCount--;
+    }
+
+    while (oneCount)
+    {
+        temp->data = 1;
+        temp = temp->next;
+        oneCount--;
+    }
+    while (twoCount)
+    {
+        temp->data = 2;
+        temp = temp->next;
+        twoCount--;
+    }
+}
+
+// 2. creating new list -- adding zeros -- ones -- twos
+// T.C == O(n) , S.C == O(n)
+void sort012_2(node *&head)
+{
+    if (head == NULL)
+        return;
+    node *temp = head;
+    node *list = new node(-1);
+    node *listHead = list;
+    // adding zeros
+    while (temp != NULL)
+    {
+        if (temp->data == 0)
+        {
+            node *n1 = new node(0);
+            list->next = n1;
+            list = n1;
+        }
+        temp = temp->next;
+    }
+    // adding ones
+    temp = head;
+    while (temp != NULL)
+    {
+        if (temp->data == 1)
+        {
+            node *n1 = new node(1);
+            list->next = n1;
+            list = n1;
+        }
+        temp = temp->next;
+    }
+
+    // adding twos
+    temp = head;
+    while (temp != NULL)
+    {
+        if (temp->data == 2)
+        {
+            node *n1 = new node(2);
+            list->next = n1;
+            list = n1;
+        }
+        temp = temp->next;
+    }
+    head = listHead->next;
+}
+
+// 3. creating 3 new list -- merging them
+void sort012_1(node* &head){
+    if(head==NULL) return;
+    node* temp = head;
+    node* l1 = new node(-1);
+} 
 
 int main()
 {
 
-    node *head = new node(60);
-    insert(50, head);
-    insert(80, head);
-    insert(50, head);
-    insert(90, head);
-    insert(10, head);
+    node *head = new node(2);
+    insert(0, head);
+    insert(2, head);
+    insert(0, head);
+    insert(1, head);
+    insert(1, head);
     insert(0, head);
     print(head);
     reverse_1(head);
@@ -384,8 +483,11 @@ int main()
     cout << "after deleting duplicate " << endl;
     // delete_duplicates(head);
     // print(head);
-    delete_dup2(head);
-    cout << endl;
+    // delete_dup2(head);
+    // cout << endl;
     print(head);
+    sort012_2(head);
+    print(head);
+
     return 0;
 }
