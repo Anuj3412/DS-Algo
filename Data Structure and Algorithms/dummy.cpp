@@ -233,13 +233,13 @@ node *loop_start(node *head)
     node *slow = head;
     node *fast = head;
 
-    // with this loop we get to the position of first intersection 
+    // with this loop we get to the position of first intersection
     while (fast->next != NULL and fast != NULL)
     {
+        slow = slow->next;
+        fast = fast->next->next;
         if (slow == fast)
             break;
-        slow = slow->next;
-        fast = fast->next;
     }
 
     // to check if there is a loop or not
@@ -253,7 +253,7 @@ node *loop_start(node *head)
         slow = slow->next;
         fast = fast->next;
     }
-    return slow;
+    return fast;
 }
 
 void remove_loop(node *loop) // here we are passing loop point --- to stay in loop and not start from begining
@@ -267,13 +267,100 @@ void remove_loop(node *loop) // here we are passing loop point --- to stay in lo
     temp->next = NULL;
 }
 
+// Sorted List
+void delete_duplicates(node *&head)
+{
+
+    if (head == NULL)
+        return;
+
+    node *curr = head;
+    while (curr->next != NULL)
+    {
+
+        if (curr->data != curr->next->data)
+        {
+            curr = curr->next;
+        }
+        else
+        {
+            curr->next = curr->next->next;
+        }
+    }
+}
+
+// Unsorted List
+// 1. O(n^2) time complexity -- stay on one element and delete all its duplicate
+// 2. O(n) space complexity - use a hashmap, where key is the value of each element in list and mark it as visited
+// 3. sort it -- then delete it
+void delete_dup(node *&head)        // normal nested loops
+{
+
+    node *curr = head;
+    while (curr != NULL)
+    {
+        node *temp = curr;
+        while (temp->next != NULL)
+        {
+
+            if (temp->next->data != curr->data)
+            {
+                temp = temp->next;
+            }
+            else
+            {
+                temp->next = temp->next->next;
+            }
+        }
+
+        curr = curr->next;
+    }
+}
+            
+void delete_dup2(node *&head)       // using map method
+{
+    if (head == NULL)
+        return;
+    map<int, bool> mp;
+    node *temp = head;
+
+    // insert in map all nodes value as false
+    while (temp != NULL)
+    {
+        mp[temp->data] = false;
+        temp = temp->next;
+    }
+
+    node *curr = head;
+    mp[head->data] = true;
+    while (curr != NULL)
+    {
+        if (curr->next != NULL and mp[curr->next->data] == false)
+        {
+            mp[curr->data] = true;
+            curr = curr->next;
+        }
+        else if (curr->next != NULL and mp[curr->next->data] == true)
+        {
+            curr->next = curr->next->next;
+        }
+
+        else
+        {
+            curr = curr->next;
+        }
+    }
+}
+
+
 int main()
 {
 
-    node *head = new node(50);
-    insert(40, head);
-    insert(30, head);
-    insert(20, head);
+    node *head = new node(60);
+    insert(50, head);
+    insert(80, head);
+    insert(50, head);
+    insert(90, head);
     insert(10, head);
     insert(0, head);
     print(head);
@@ -281,18 +368,24 @@ int main()
     print(head);
     reverse_2(head, head, NULL);
     print(head);
-    cout << "mid at "<< mid_1(head)->data << endl;
+    cout << "mid at " << mid_1(head)->data << endl;
     cout << "mid at " << mid_2(head)->data << endl;
     // node *n1 = k_order(head, 4);
     // print(n1);
     make_circle(head);
     cout << "is circle " << circular_check(head) << endl;
     cout << "is circle " << check_circle(head) << endl;
-    node* n2 = loop_start(head);
+    node *n2 = loop_start(head);
     cout << "loop starting at " << n2->data << endl;
     remove_loop(n2);
     print(head);
-    cout << "is loop " << check_circle(head);
-
+    cout << "is loop " << check_circle(head) << endl;
+    print(head);
+    cout << "after deleting duplicate " << endl;
+    // delete_duplicates(head);
+    // print(head);
+    delete_dup2(head);
+    cout << endl;
+    print(head);
     return 0;
 }

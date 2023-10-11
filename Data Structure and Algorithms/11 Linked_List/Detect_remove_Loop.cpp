@@ -141,10 +141,10 @@ node *loop_start(node *head)
     // with this loop we get to the position of first intersection
     while (fast->next != NULL and fast != NULL)
     {
-        if (slow == fast)
-            break;
+      
         slow = slow->next;
-        fast = fast->next;
+        fast = fast->next->next;
+        if(slow==fast) break;
     }
 
     // to check if there is a loop or not
