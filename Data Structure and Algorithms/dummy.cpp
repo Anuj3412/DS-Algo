@@ -446,10 +446,41 @@ void sort012_2(node *&head)
 }
 
 // 3. creating 3 new list -- merging them
+// Time Complexity = O(n) and S.C = O(n)
 void sort012_1(node* &head){
     if(head==NULL) return;
     node* temp = head;
     node* l1 = new node(-1);
+    node* l2 = new node(-1);
+    node* l0 = new node(-1);
+    node* l1Head = l1;
+    node* l0Head = l0;
+    node* l2Head = l2;
+
+    while(temp!= NULL){
+        if(temp->data == 0){
+            node* n1 = new node(0);
+            l0->next = n1;
+            l0 = n1;
+        }
+        else if (temp->data == 1)
+        {
+            node *n1 = new node(1);
+            l1->next = n1;
+            l1 = n1;
+        }
+        else if (temp->data == 2)
+        {
+            node *n1 = new node(2);
+            l2->next = n1;
+            l2 = n1;
+        }
+        temp = temp->next;
+    }
+    head = l0Head->next;
+    l0 ->next = l1Head->next;
+    l1 -> next= l2Head->next ;
+
 } 
 
 int main()
@@ -486,7 +517,7 @@ int main()
     // delete_dup2(head);
     // cout << endl;
     print(head);
-    sort012_2(head);
+    sort012_1(head);
     print(head);
 
     return 0;
