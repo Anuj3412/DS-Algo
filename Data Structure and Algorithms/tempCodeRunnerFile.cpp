@@ -1,2 +1,0 @@
-    if (slow == fast)
-            break;

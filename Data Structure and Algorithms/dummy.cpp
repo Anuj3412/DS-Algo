@@ -447,19 +447,23 @@ void sort012_2(node *&head)
 
 // 3. creating 3 new list -- merging them
 // Time Complexity = O(n) and S.C = O(n)
-void sort012_1(node* &head){
-    if(head==NULL) return;
-    node* temp = head;
-    node* l1 = new node(-1);
-    node* l2 = new node(-1);
-    node* l0 = new node(-1);
-    node* l1Head = l1;
-    node* l0Head = l0;
-    node* l2Head = l2;
+void sort012_1(node *&head)
+{
+    if (head == NULL)
+        return;
+    node *temp = head;
+    node *l1 = new node(-1);
+    node *l2 = new node(-1);
+    node *l0 = new node(-1);
+    node *l1Head = l1;
+    node *l0Head = l0;
+    node *l2Head = l2;
 
-    while(temp!= NULL){
-        if(temp->data == 0){
-            node* n1 = new node(0);
+    while (temp != NULL)
+    {
+        if (temp->data == 0)
+        {
+            node *n1 = new node(0);
             l0->next = n1;
             l0 = n1;
         }
@@ -478,22 +482,112 @@ void sort012_1(node* &head){
         temp = temp->next;
     }
     head = l0Head->next;
-    l0 ->next = l1Head->next;
-    l1 -> next= l2Head->next ;
+    l0->next = l1Head->next;
+    l1->next = l2Head->next;
+}
 
-} 
+// comparing one of the list elements
+// if it can fit in between two elemnts of other list
+// then we merge that element to corresponding list
+// Time complexity O(m+n) , space complexity O(1)
+node *merge_sorted(node *&head1, node *&head2)
+{
+    if (head1 == NULL)
+        return head2;
+    else if (head2 == NULL)
+        return head1;
 
+    node *prev = head1;
+    node *curr = prev->next;
+    node *temp = head2;
+
+    // for single element
+    if (curr == NULL)
+    {
+        prev->next = temp;
+        return head1;
+    }
+    while (curr != NULL and temp != NULL)
+    {
+        if (temp->data <= curr->data and prev->data <= temp->data)
+        {
+            prev->next = temp;
+            temp = temp->next;
+            prev = prev->next;
+            prev->next = curr;
+        }
+        else
+        {
+            prev = curr;
+            if (curr->next == NULL and temp != NULL)
+            {
+                curr->next = temp;
+                break;
+            }
+            else
+            {
+                curr = curr->next;
+            }
+        }
+    }
+
+    return head1;
+}
+
+// check palindrome
+// 1. copy data in array -- check array if palindorme or not --- TC O(n) and SC O(n)
+// 2. get mid -- reverse after mid part -- compare the parts
+bool plaindrome_1(node *head)
+{
+    vector<int> nums;
+    node* temp = head;
+    while(temp!= NULL){
+        nums.push_back(temp->data);
+        temp= temp->next;
+    }
+    int s = 0; 
+    int n = nums.size();
+    int e = n-1;
+    while(s<=e){
+        if(nums[s]!=nums[e]) return false;
+        s++;
+        e--;
+    }
+    return true;
+}
+
+bool palindrome_2(node* head){
+
+
+    node* mid = mid_1(head);
+    //reverse second half of linked list
+    reverse_1(mid->next);
+    // compare the before mid and after mid part
+    node* temp = head;
+    node* head2 = mid->next;
+    while(head2!= NULL){
+        if(temp->data!=head2->data){
+            return false;
+        }
+        head2 = head2->next;
+        temp = temp->next;
+    }
+
+    return true;
+
+
+}
 
 int main()
 {
 
-    node *head = new node(2);
-    insert(0, head);
+    node *head = new node(1);
     insert(2, head);
-    insert(0, head);
-    insert(1, head);
     insert(1, head);
     insert(0, head);
+    insert(1, head);
+    insert(2, head);
+    insert(1, head);
     print(head);
     reverse_1(head);
     print(head);
@@ -518,8 +612,10 @@ int main()
     // delete_dup2(head);
     // cout << endl;
     print(head);
-    sort012_1(head);
+    // sort012_1(head);
     print(head);
+    if(palindrome_2(head)) cout<<"is palindorme ";
+    else cout<<"is not a palindrome ";
 
     return 0;
 }

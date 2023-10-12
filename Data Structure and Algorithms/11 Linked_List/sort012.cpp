@@ -50,6 +50,7 @@ void insert(int data, node *&head)
 
 // Function to sort 0 1 2
 // 1. keep count of 0 1 2 --- change the data of the list accordingly
+// time complexity O(n)  , space complexity = O(1)
 void sort012(node *&head)
 {
     if (head == NULL)
@@ -93,7 +94,7 @@ void sort012(node *&head)
 }
 
 // 2. creating new list -- adding zeros -- ones -- twos
-// T.C == O(n) , S.C == O(n)
+// T.C == O(n) , S.C == O(1)
 void sort012_2(node *&head)
 {
     if (head == NULL)
@@ -141,7 +142,7 @@ void sort012_2(node *&head)
 }
 
 // 3. creating 3 new list -- merging them
-// Time Complexity = O(n) and S.C = O(n)
+// Time Complexity = O(n) and S.C = O(1)
 void sort012_1(node *&head)
 {
     if (head == NULL)
