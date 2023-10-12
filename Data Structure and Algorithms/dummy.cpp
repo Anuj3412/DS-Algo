@@ -591,7 +591,7 @@ bool palindrome_2(node *head)
 -- convert it into list
 -- reverse the list
 -- return list
--- TC O(n) , SC O(n)
+-- TC O(n+m) , SC O(max(m , n))
 
 */
 
@@ -669,7 +669,7 @@ node *addList(node *head1, node *head2)
 -- add them with taking carry
 -- reverse the final list
 -- return the list
--- TC O(n) , SC O(n)
+-- TC O(n+m) , SC O(max(m , n))
 
 */
 
@@ -699,22 +699,29 @@ node *addList_2(node *head1, node *head2)
         curr2 = next;
     }
     head2 = prev;
+
+    // add the digits -- taking carry
     curr1 = head1;
     curr2 = head2;
     while (curr1 != NULL or curr2 != NULL)
     {
         int sum = 0;
+        // checking for NULL case
         if (curr1 == NULL)
             sum = carry + curr2->data;
         else if (curr2 == NULL)
             sum = carry + curr1->data;
         else
             sum = carry + curr1->data + curr2->data;
+
         int digit = sum % 10;
         node *n1 = new node(digit);
         carry = sum / 10;
         ans->next = n1;
         ans = n1;
+
+        // checking for NULL case
+
         if (curr1 == NULL)
             curr2 = curr2->next;
         else if (curr2 == NULL)
@@ -729,6 +736,28 @@ node *addList_2(node *head1, node *head2)
     reverse_1(ansHead);
 
     return ansHead;
+}
+
+// Clone the linked list with random pointers 
+// Approach - 1
+/*
+
+    -- clone normally the list 
+    -- now iterate through original to find the random pointers
+    -- now iterate through the clone to join the randoms
+    return the clone list
+
+
+*/
+
+// Approach - 2
+/*
+
+
+
+*/
+node* clone_random(node* head){
+
 }
 
 int main()
