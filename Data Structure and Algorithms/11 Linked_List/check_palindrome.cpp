@@ -48,30 +48,6 @@ void insert(int data, node *&head)
     head = temp;
 }
 
-// check palindrome
-// 1. copy data in array -- check array if palindorme or not --- TC O(n) and SC O(n)
-// 2. get mid -- reverse after mid part -- compare the parts
-bool plaindrome_1(node *head)
-{
-    vector<int> nums;
-    node *temp = head;
-    while (temp != NULL)
-    {
-        nums.push_back(temp->data);
-        temp = temp->next;
-    }
-    int s = 0;
-    int n = nums.size();
-    int e = n - 1;
-    while (s <= e)
-    {
-        if (nums[s] != nums[e])
-            return false;
-        s++;
-        e--;
-    }
-    return true;
-}
 void reverse_1(node *&head)
 {
 
@@ -101,6 +77,31 @@ node *mid_1(node *&head)
         slow = slow->next;
     }
     return slow;
+}
+
+// check palindrome
+// 1. copy data in array -- check array if palindorme or not --- TC O(n) and SC O(n)
+// 2. get mid -- reverse after mid part -- compare the parts
+bool plaindrome_1(node *head)
+{
+    vector<int> nums;
+    node *temp = head;
+    while (temp != NULL)
+    {
+        nums.push_back(temp->data);
+        temp = temp->next;
+    }
+    int s = 0;
+    int n = nums.size();
+    int e = n - 1;
+    while (s <= e)
+    {
+        if (nums[s] != nums[e])
+            return false;
+        s++;
+        e--;
+    }
+    return true;
 }
 
 bool palindrome_2(node *head)
