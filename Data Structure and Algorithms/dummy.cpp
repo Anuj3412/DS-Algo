@@ -738,27 +738,7 @@ node *addList_2(node *head1, node *head2)
     return ansHead;
 }
 
-// Clone the linked list with random pointers 
-// Approach - 1
-/*
 
-    -- clone normally the list 
-    -- now iterate through original to find the random pointers
-    -- now iterate through the clone to join the randoms
-    return the clone list
-
-
-*/
-
-// Approach - 2
-/*
-
-
-
-*/
-node* clone_random(node* head){
-
-}
 
 int main()
 {
