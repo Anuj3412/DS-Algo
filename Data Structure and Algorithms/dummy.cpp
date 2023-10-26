@@ -7,11 +7,13 @@ class node
 public:
     int data;
     node *next = NULL;
+    node *random = NULL;    // this is just for a question random pointers
 
     node(int data)
     {
         this->data = data;
         this->next = NULL;
+        this->random = NULL;
     }
 };
 
@@ -738,7 +740,41 @@ node *addList_2(node *head1, node *head2)
     return ansHead;
 }
 
+node *copyRandomList2(node *head)
+{
+    node *newList = new node(-1);
+    node *temp = head;
+    node *cloneHead = newList;
+    while (temp != NULL)
+    {
+        node *temp2 = new node(temp->data);
+        cloneHead->next = temp2;
+        cloneHead = temp2;
+        temp = temp->next;
+    }
 
+    cloneHead = newList->next;
+    temp = head;
+    node *temp2 = cloneHead;
+    map<node *, node *> mp;
+    while (temp != NULL)
+    {
+        mp[temp] = temp2;
+        temp = temp->next;
+        temp2 = temp2->next;
+    }
+
+    temp = head;
+    temp2 = cloneHead;
+    while (temp != NULL)
+    {
+
+        temp2->random = mp[temp->random];
+        temp = temp->next;
+        temp2 = temp2->next;
+    }
+    return cloneHead;
+}
 
 int main()
 {

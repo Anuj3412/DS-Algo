@@ -1,59 +1,56 @@
-#include <bits/stdc++.h>
-
-#include <vector>
-#include <algorithm>
+#include<bits/stdc++.h>
 using namespace std;
-bool is_prime(int num)
-{
-    if (num <= 1)
-    {
-        return false;
+
+class node{
+
+    public:
+    int data ;
+    node* next = NULL;
+
+    node(int data){
+        this->data = data;
+        this->next = NULL;
     }
-    for (int i = 2; i * i <= num; i++)
-    {
-        if (num % i == 0)
-        {
-            return false;
-        }
+
+};
+
+void At_head(node* &head , int data){
+    node* temp = new node(data);
+    if(head == NULL){
+        temp = head;
     }
-    return true;
+    else{
+        temp->next = head;
+        head = temp;
+    }
 }
 
-int main()
-{
-    int n1, n2;
-    std::cout << "Enter the range (n1, n2): ";
-    std::cin >> n1 >> n2;
-
-    std::vector<int> prime_numbers;
-    for (int num = n1; num < n2; num++)
-    {
-        if (is_prime(num))
-        {
-            prime_numbers.push_back(num);
-        }
+void print(node* head){
+    node* temp = head;
+    if(head==NULL) {
+    cout<<"Empty List";
+    return;
     }
-
-    if (prime_numbers.empty())
-    {
-        std::cout << "No prime numbers found in the given range." << std::endl;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp = temp->next;
     }
-    // else if(prime_numbers.size()==1){
-    //     return prime_numbers[0];
-    // }
-    else
-    {
-            int sum_diff = std::accumulate(prime_numbers.begin(), prime_numbers.end(), 0,
-                                        [max_val = *std::max_element(prime_numbers.begin(), prime_numbers.end())](int sum, int num)
-                                        {
-                                            return sum + max_val - num;
-                                        });
-            if(prime_numbers.size()==1) sum_diff = prime_numbers[0];
+    cout<<endl;
+}
 
-            sum = sum_diff;
 
-        std::cout << "Sum of differences between the largest array element and each of the remaining array element is: " << sum_diff << std::endl;yyyy
-    }
+int main(){
+
+    node* n1 = new node(50);
+    node* head = n1;
+    At_head(head , 40);
+    At_head(head , 30);
+    At_head(head , 20);
+    At_head(head , 10);
+    At_head(head , 0);
+    print(head);
+    
+
 
     return 0;
 }
