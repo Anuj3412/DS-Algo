@@ -95,6 +95,7 @@ node *copyRandomList(node *head)
     return copyHead;
 }
 
+// using MAP Method 
 // Approach - 2
 /*
 

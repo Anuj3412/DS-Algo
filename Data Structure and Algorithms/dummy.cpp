@@ -7,7 +7,7 @@ class node
 public:
     int data;
     node *next = NULL;
-    node *random = NULL;    // this is just for a question random pointers
+    node *random = NULL; // this is just for a question random pointers
 
     node(int data)
     {
@@ -740,6 +740,7 @@ node *addList_2(node *head1, node *head2)
     return ansHead;
 }
 
+// Map Method
 node *copyRandomList2(node *head)
 {
     node *newList = new node(-1);
@@ -774,6 +775,93 @@ node *copyRandomList2(node *head)
         temp2 = temp2->next;
     }
     return cloneHead;
+}
+
+node *merge(node *head1, node *head2)
+{
+    if (head1 == NULL)
+        return head2;
+    else if (head2 == NULL)
+        return head1;
+
+    // for single element
+    if (head1->next == NULL)
+    {
+        head1->next = head2;
+        return head1;
+    }
+
+    // merging
+    node *prev = head1;
+    node *curr = prev->next;
+    node *temp = head2;
+    while (curr != NULL and temp != NULL)
+    {
+        if (prev->data <= temp->data and curr->data >= temp->data)
+        {
+            prev->next = temp;
+            prev = temp;
+            temp = temp->next;
+            prev->next = curr;
+        }
+        else
+        {
+            prev = curr;
+            if (curr->next == NULL and temp != NULL)
+            {
+                curr->next = temp;
+                break;
+            }
+            else
+            {
+                curr = curr->next;
+            }
+        }
+    }
+    return head1;
+}
+
+// Merge Sort in Linked List
+node *mergeSort(node *head)
+{
+    // base case
+    if (head == NULL or head->next == NULL)
+    {
+        return head;
+    }
+
+    // break the list in two parts
+    node *fast = head;
+    node *slow = head;
+    node *mid = NULL;
+    while (fast->next != NULL and fast->next->next != NULL)
+    {
+
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    mid = slow;
+
+    // seprate it into two parts
+    node *left = head;
+    node *right = mid->next;
+    mid->next = NULL;
+
+    // recursive call
+    left = mergeSort(left);
+    right = mergeSort(right);
+
+    // merge these sorted list
+    node *ans = NULL;
+    if (left->data <= right->data)
+    {
+        ans = merge(left, right);
+    }
+    else
+    {
+        ans = merge(right, left);
+    }
+    return ans;
 }
 
 int main()

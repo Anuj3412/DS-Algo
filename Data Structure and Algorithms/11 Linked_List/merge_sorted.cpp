@@ -71,7 +71,7 @@ node *merge_sorted(node *&head1, node *&head2)
     if (curr == NULL)
     {
         prev->next = temp;
-        return;
+        return head1;
     }
     while (curr != NULL and temp != NULL)
     {
@@ -99,6 +99,7 @@ node *merge_sorted(node *&head1, node *&head2)
 
     return head1;
 }
+
 
 int main()
 {
