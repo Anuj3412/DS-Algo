@@ -20,7 +20,7 @@ public:
     {
 
         this->name = name;  // here "This" keyword is used as pointer pointing to the object created
-        cout << this->name; // it is used to differentiate between obejct property ans parameter
+        cout << this->name; // it is used to differentiate between object property and parameter
     }
 
     void setname(string s){

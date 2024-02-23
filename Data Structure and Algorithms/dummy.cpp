@@ -1,37 +1,51 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+class hero{
+public:
+string name;
+int age;
+
+hero(){
+    cout<<"default constructor is dead "<<endl;
+}
+
+hero(string name , int age){
+    this->name = name;
+    this->age = age;
+}
+
+hero(hero & temp){
+    this->name = temp.name;
+    this->age = temp.age;
+}
+
+void setName(string name){
+    this->name = name;
+}
+
+void setAge(int age){
+    this->age = age;
+}
+
+
+
+
+};
+
+
+
 int main()
-{
+{   
 
-    // int arr[5];
-    // for (int i = 0; i < 5; i++)
-    // {
-
-    //     cin >> arr[i];
-    // }
-    // for(int i = 0 ; i< 5 ; i++){
-    // cout << arr[i] << endl;
-    // }
-
-    vector<int> v;
-    int n = 0;
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
-    cout << "hi" << endl;
-    int max = v[0];
-    for (int i = 1; i < n; i++)
-    {
-        if (max < v[i])
-        {
-            cout << "hi" << endl;
-            max = v[i];
-        }
-    }
-    cout << max << endl;
+    hero A("Anuj" , 22);
+    cout<<"A- "<<A.name<<" "<<A.age<<endl;
+    hero B(A);
+    cout<<"B- "<<B.name<<" "<<B.age<<endl;
+    A.setAge(23);
+    A.setName("Anuj Bajaj");
+    cout<<"A- "<<A.name<<" "<<A.age<<endl;
+    cout<<"B- "<<B.name<<" "<<B.age<<endl;
 
     return 0;
 }

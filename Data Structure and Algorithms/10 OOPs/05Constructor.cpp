@@ -21,7 +21,7 @@ public:
     {
 
         this->name = name;  // here "This" keyword is used as pointer pointing to the object created
-        cout << this->name; // it is used to differentiate between obejct property and parameter
+        cout << this->name; // it is used to differentiate between object property and parameter
     }
 
     // in absence of made constructor .... (parameteised constructor) dont work if no parameter is passed

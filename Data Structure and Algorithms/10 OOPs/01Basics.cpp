@@ -30,7 +30,7 @@ class hero{
     }
 
 
-    //Member funaction
+    //Member function
     void print(){
         cout<<this->name<<endl;
         cout<<this->age<<endl;

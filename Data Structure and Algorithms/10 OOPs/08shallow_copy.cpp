@@ -3,7 +3,7 @@ using namespace std;
 
 /* This is giving error of overloading because of two copy constructor */
 
-// only one costructor is required
+// only one constructor is required
 
 class hero
 {
